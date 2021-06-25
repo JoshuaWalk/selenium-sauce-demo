@@ -2,7 +2,7 @@ import pytest, time
 from login_page_var import *
 from web_fixtures import *
 
-
+@pytest.mark.login
 class Test_Login(Basic_Test):
     def test_valid_login(self):
         self.login(good_user, all_passwords)
