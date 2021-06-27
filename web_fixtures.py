@@ -65,6 +65,16 @@ class Cart_Test(Store_Test):
     def check_out(self):
         self.click_button('checkout')
 
+    def check_out_form(self, f_name, l_name, code):
+        first_name = self.driver.find_element_by_id('first-name')
+        last_name = self.driver.find_element_by_id('last-name')
+        zip = self.driver.find_element_by_id('postal-code')
+        first_name.send_keys(f_name)
+        last_name.send_keys(l_name)
+        zip.send_keys(code)
+        zip.submit()
+        time.sleep(3)
+
     def one_item_cart(self):
         self.add_backpack()
         self.get_to_cart()
