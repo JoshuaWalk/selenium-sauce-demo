@@ -26,3 +26,60 @@ class Basic_Test():
     def click_button(self, button_id):
         button = self.driver.find_element_by_id(button_id)
         button.click()
+
+    def click_button_class(self, class_name):
+        button = self.driver.find_element_by_class_name(class_name)
+        button.click()
+
+class Store_Test(Basic_Test):
+    def add_backpack(self):
+        self.click_button('add-to-cart-sauce-labs-backpack')
+    def add_bike_light(self):
+        self.click_button('add-to-cart-sauce-labs-bike-light')
+    def add_bolt_shirt(self):
+        self.click_button('add-to-cart-sauce-labs-bolt-t-shirt')
+    def add_jacket(self):
+        self.click_button('add-to-cart-sauce-labs-fleece-jacket')
+    def add_onsie(self):
+        self.click_button('add-to-cart-sauce-labs-onesie')
+    def add_t_shirt(self):
+        self.click_button('add-to-cart-test.allthethings()-t-shirt-(red)')
+
+    def remove_backpack(self):
+        self.click_button('remove-sauce-labs-backpack')
+    def remove_bike_light(self):
+        self.click_button('remove-sauce-labs-bike-light')
+    def remove_bolt_shirt(self):
+        self.click_button('remove-sauce-labs-bolt-t-shirt')
+    def remove_jacket(self):
+        self.click_button('remove-sauce-labs-fleece-jacket')
+    def remove_onsie(self):
+        self.click_button('remove-sauce-labs-onesie')
+    def remove_t_shirt(self):
+        self.click_button('remove-test.allthethings()-t-shirt-(red)')
+
+class Cart_Test(Store_Test):
+    def get_to_cart(self):
+        self.click_button_class('shopping_cart_link')
+
+    def check_out(self):
+        self.click_button('checkout')
+
+    def one_item_cart(self):
+        self.add_backpack()
+        self.get_to_cart()
+
+    def three_item_cart(self):
+        self.add_t_shirt()
+        self.add_bike_light()
+        self.add_jacket()
+        self.get_to_cart()
+
+    def all_item_cart(self):
+        self.add_backpack()
+        self.add_bike_light()
+        self.add_bolt_shirt()
+        self.add_jacket()
+        self.add_onsie()
+        self.add_t_shirt()
+        self.get_to_cart()
