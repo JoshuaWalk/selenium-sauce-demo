@@ -1,4 +1,4 @@
-import pytest, time
+import pytest
 from login_page_var import *
 from web_fixtures import *
 
@@ -9,6 +9,23 @@ class Test_Login(Basic_Test):
         title = self.driver.find_element_by_class_name('title').text
         assert title == 'PRODUCTS'
 
+    def test_valid_login_with_spaces(self):
+        self.login('            ' + good_user, all_passwords)
+        error_msg = 'Epic sadface: Username and password do not match any user in this service'
+        error_div = self.driver.find_element_by_class_name('error-message-container')
+        assert error_div.text == error_msg
+
+    def test_wrong_username(self):
+        self.login('foo' , all_passwords)
+        error_msg = 'Epic sadface: Username and password do not match any user in this service'
+        error_div = self.driver.find_element_by_class_name('error-message-container')
+        assert error_div.text == error_msg
+
+    def test_wrong_password(self):
+        self.login(good_user , 'wrong_password')
+        error_msg = 'Epic sadface: Username and password do not match any user in this service'
+        error_div = self.driver.find_element_by_class_name('error-message-container')
+        assert error_div.text == error_msg
     def test_locked_login(self):
         self.login(locked_user, all_passwords)
         error_message = 'Epic sadface: Sorry, this user has been locked out.'
