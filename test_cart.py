@@ -1,7 +1,7 @@
 from web_fixtures import *
 import pytest
 
-
+@pytest.mark.all_cart
 class Test_Cart(Cart_Test):
     @pytest.mark.cart
     def test_cart_page(self):
