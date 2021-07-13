@@ -1,7 +1,7 @@
 import pytest, time
-from test_login_page import Basic_Test
 from login_page_var import *
 from web_fixtures import *
+from selenium.webdriver.support.ui import Select
 
 @pytest.mark.shop
 class Test_Shop(Store_Test):
@@ -49,6 +49,63 @@ class Test_Shop(Store_Test):
         self.remove_bike_light()
         assert cart_amount.text == '1'
         self.remove_t_shirt()
+
+    @pytest.mark.sorting
+    def test_sort_low_to_high(self):
+        self.login(good_user, all_passwords)
+        options = Select(self.driver.find_element_by_class_name('product_sort_container'))
+        options.select_by_visible_text('Price (low to high)')
+        prices = []
+        i = 0 
+        time.sleep(3)
+        for item in self.driver.find_elements_by_class_name('inventory_item_price'):
+            number = float(item.text[1:])
+            prices.append(number)
+        while i < len(prices) - 1:
+            assert prices[i] <= prices[i + 1]
+            i += 1
+
+
+    @pytest.mark.sorting
+    def test_sort_high_to_low(self):
+        self.login(good_user, all_passwords)
+        options = Select(self.driver.find_element_by_class_name('product_sort_container'))
+        options.select_by_visible_text('Price (high to low)')
+        prices = []
+        i = 0 
+        time.sleep(3)
+        for item in self.driver.find_elements_by_class_name('inventory_item_price'):
+            number = float(item.text[1:])
+            prices.append(number)
+        while i < len(prices) - 1:
+            assert prices[i] >= prices[i + 1]
+            i += 1
+
+    @pytest.mark.sorting
+    def test_sort_a_to_z(self):
+        self.login(good_user, all_passwords)
+        options = Select(self.driver.find_element_by_class_name('product_sort_container'))
+        options.select_by_visible_text('Name (A to Z)')
+        names = []
+        time.sleep(3)
+        for name in self.driver.find_elements_by_class_name('inventory_item_name'):
+            names.append(name.text)
+        sorts = sorted(names)
+        assert names == sorts
+
+    @pytest.mark.sorting
+    def test_sort_z_to_a(self):
+        self.login(good_user, all_passwords)
+        options = Select(self.driver.find_element_by_class_name('product_sort_container'))
+        options.select_by_visible_text('Name (Z to A)')
+        names = []
+        time.sleep(3)
+        for name in self.driver.find_elements_by_class_name('inventory_item_name'):
+            names.append(name.text)
+        reverse = sorted(names, reverse=True)
+        assert names == reverse
+
+
 
 
 
