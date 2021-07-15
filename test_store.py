@@ -105,7 +105,129 @@ class Test_Shop(Store_Test):
         reverse = sorted(names, reverse=True)
         assert names == reverse
 
+    @pytest.mark.product
+    def test_click_backpack(self):
+        self.login(good_user, all_passwords)
+        options = Select(self.driver.find_element_by_class_name('product_sort_container'))
+        options.select_by_visible_text('Name (A to Z)')
+        items = self.driver.find_elements_by_class_name('inventory_item_name')
+        items[0].click()
+        time.sleep(1)
+        assert self.driver.current_url == 'https://www.saucedemo.com/inventory-item.html?id=4'
 
+    @pytest.mark.product
+    def test_click_bike(self):
+        self.login(good_user, all_passwords)
+        options = Select(self.driver.find_element_by_class_name('product_sort_container'))
+        options.select_by_visible_text('Name (A to Z)')
+        items = self.driver.find_elements_by_class_name('inventory_item_name')
+        items[1].click()
+        time.sleep(1)
+        assert self.driver.current_url == 'https://www.saucedemo.com/inventory-item.html?id=0'
+
+    @pytest.mark.product
+    def test_click_bolt_shirt(self):
+        self.login(good_user, all_passwords)
+        options = Select(self.driver.find_element_by_class_name('product_sort_container'))
+        options.select_by_visible_text('Name (A to Z)')
+        items = self.driver.find_elements_by_class_name('inventory_item_name')
+        items[2].click()
+        time.sleep(1)
+        assert self.driver.current_url == 'https://www.saucedemo.com/inventory-item.html?id=1'
+
+    @pytest.mark.product
+    def test_click_fleece(self):
+        self.login(good_user, all_passwords)
+        options = Select(self.driver.find_element_by_class_name('product_sort_container'))
+        options.select_by_visible_text('Name (A to Z)')
+        items = self.driver.find_elements_by_class_name('inventory_item_name')
+        items[3].click()
+        time.sleep(1)
+        assert self.driver.current_url == 'https://www.saucedemo.com/inventory-item.html?id=5'
+
+    @pytest.mark.product
+    def test_click_onsie(self):
+        self.login(good_user, all_passwords)
+        options = Select(self.driver.find_element_by_class_name('product_sort_container'))
+        options.select_by_visible_text('Name (A to Z)')
+        items = self.driver.find_elements_by_class_name('inventory_item_name')
+        items[4].click()
+        time.sleep(1)
+        assert self.driver.current_url == 'https://www.saucedemo.com/inventory-item.html?id=2'
+
+    @pytest.mark.product
+    def test_click_testing_shirt(self):
+        self.login(good_user, all_passwords)
+        options = Select(self.driver.find_element_by_class_name('product_sort_container'))
+        options.select_by_visible_text('Name (A to Z)')
+        items = self.driver.find_elements_by_class_name('inventory_item_name')
+        items[5].click()
+        time.sleep(1)
+        assert self.driver.current_url == 'https://www.saucedemo.com/inventory-item.html?id=3'
+
+    @pytest.mark.product_pic
+    def test_click_backpack_pic(self):
+        self.login(good_user, all_passwords)
+        options = Select(self.driver.find_element_by_class_name('product_sort_container'))
+        options.select_by_visible_text('Name (A to Z)')
+        items = self.driver.find_elements_by_xpath("//div[@class='inventory_item_img']")
+        items[0].click()
+        time.sleep(1)
+        assert self.driver.current_url == 'https://www.saucedemo.com/inventory-item.html?id=4'
+
+    @pytest.mark.product_pic
+    def test_click_bike_pic(self):
+        self.login(good_user, all_passwords)
+        options = Select(self.driver.find_element_by_class_name('product_sort_container'))
+        options.select_by_visible_text('Name (A to Z)')
+        items = self.driver.find_elements_by_xpath("//div[@class='inventory_item_img']")
+        items[1].click()
+        time.sleep(1)
+        assert self.driver.current_url == 'https://www.saucedemo.com/inventory-item.html?id=0'
+
+
+    @pytest.mark.product_pic
+    def test_click_bolt_pic(self):
+        self.login(good_user, all_passwords)
+        options = Select(self.driver.find_element_by_class_name('product_sort_container'))
+        options.select_by_visible_text('Name (A to Z)')
+        items = self.driver.find_elements_by_xpath("//div[@class='inventory_item_img']")
+        items[2].click()
+        time.sleep(1)
+        assert self.driver.current_url == 'https://www.saucedemo.com/inventory-item.html?id=1'
+
+
+    @pytest.mark.product_pic
+    def test_click_fleece_pic(self):
+        self.login(good_user, all_passwords)
+        options = Select(self.driver.find_element_by_class_name('product_sort_container'))
+        options.select_by_visible_text('Name (A to Z)')
+        items = self.driver.find_elements_by_xpath("//div[@class='inventory_item_img']")
+        items[3].click()
+        time.sleep(1)
+        assert self.driver.current_url == 'https://www.saucedemo.com/inventory-item.html?id=5'
+
+
+    @pytest.mark.product_pic
+    def test_click_onsie_pic(self):
+        self.login(good_user, all_passwords)
+        options = Select(self.driver.find_element_by_class_name('product_sort_container'))
+        options.select_by_visible_text('Name (A to Z)')
+        items = self.driver.find_elements_by_xpath("//div[@class='inventory_item_img']")
+        items[4].click()
+        time.sleep(1)        
+        assert self.driver.current_url == 'https://www.saucedemo.com/inventory-item.html?id=2'
+
+
+    @pytest.mark.product_pic
+    def test_click_testing_shirt_pic(self):
+        self.login(good_user, all_passwords)
+        options = Select(self.driver.find_element_by_class_name('product_sort_container'))
+        options.select_by_visible_text('Name (A to Z)')
+        items = self.driver.find_elements_by_xpath("//div[@class='inventory_item_img']")
+        items[5].click()
+        time.sleep(1)
+        assert self.driver.current_url == 'https://www.saucedemo.com/inventory-item.html?id=3'
 
 
 
